@@ -14,7 +14,7 @@ class FirestoreStorage implements Storage {
 
   @override
   Future<List<Exercise>> getExercises() async {
-    // final db = FirebaseFirestore.instance;
+    final db = FirebaseFirestore.instance;
     // final userId = AuthController().getUserId();
     // if (userId == null) {
     //   return [];

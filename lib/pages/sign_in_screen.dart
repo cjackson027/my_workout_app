@@ -14,7 +14,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      // backgroundColor: Colors.blueGrey,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -34,22 +34,22 @@ class _SignInScreenState extends State<SignInScreen> {
                     Flexible(
                       flex: 1,
                       child: Image.asset(
-                        'assets/firebase_logo.png',
-                        height: 160,
+                        'assets/dumbell2.png',
+                        height: 260,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    //SizedBox(height: 5),
                     const Text(
-                      'FlutterFire',
+                      'My Workouts',
                       style: TextStyle(
-                        color: Colors.yellow,
+                        color: Colors.lightGreen,
                         fontSize: 40,
                       ),
                     ),
                     const Text(
-                      'Authentication',
+                      'Application',
                       style: TextStyle(
-                        color: Colors.orangeAccent,
+                        color: Colors.green,
                         fontSize: 40,
                       ),
                     ),
@@ -66,7 +66,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   }
                   return const CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      Colors.orangeAccent,
+                      Colors.white54,
                     ),
                   );
                 },

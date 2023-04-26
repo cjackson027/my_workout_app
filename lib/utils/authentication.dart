@@ -100,7 +100,7 @@ class Authentication {
       backgroundColor: Colors.black,
       content: Text(
         content,
-        style: TextStyle(color: Colors.redAccent, letterSpacing: 0.5),
+        style: TextStyle(color: Colors.lightGreen, letterSpacing: 0.5),
       ),
     );
   }

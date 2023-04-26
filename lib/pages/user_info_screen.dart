@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_workout_app/pages/home_page.dart';
 import 'package:my_workout_app/pages/sign_in_screen.dart';
 
 import '../utils/authentication.dart';
@@ -48,11 +49,28 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      //backgroundColor: Colors.blueGrey,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.blueGrey,
-        title: const Text('Authentication'),
+        // elevation: 0,
+        //backgroundColor: Colors.blueGrey,
+        title: const Text('Profile Info'),
+        leading: GestureDetector(
+          child: IconButton(
+              icon: const Icon(Icons.arrow_back_sharp,
+                size: 25,
+                color: Colors.white,),
+              onPressed: () {
+                User? user = _user;
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(
+                        user: user,
+                      ),
+                    ),
+                );
+              }
+          ),
+        )
       ),
       body: SafeArea(
         child: Padding(
@@ -100,7 +118,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               Text(
                 _user.displayName!,
                 style: const TextStyle(
-                  color: Colors.yellow,
+                  color: Colors.lightGreenAccent,
                   fontSize: 26,
                 ),
               ),
@@ -108,7 +126,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               Text(
                 '( ${_user.email!} )',
                 style: const TextStyle(
-                  color: Colors.orangeAccent,
+                  color: Colors.greenAccent,
                   fontSize: 20,
                   letterSpacing: 0.5,
                 ),
@@ -129,7 +147,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   : ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
-                    Colors.redAccent,
+                    Colors.lightGreen,
                   ),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(

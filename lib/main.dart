@@ -22,7 +22,18 @@ class MyApp extends StatelessWidget {
       title: 'My Workout App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.lightGreen,
+        textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateColor.resolveWith((_) => Colors.green),
+                foregroundColor:
+                MaterialStateColor.resolveWith((_) => Colors.white))),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.lightGreen,
+        // foregroundColor: Colors.greenAccent,
+        // hoverColor: Colors.redAccent,
+        // splashColor: Colors.tealAccents
+        ),
         brightness: Brightness.dark,
       ),
       home: const SignInScreen(),

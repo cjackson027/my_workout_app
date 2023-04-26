@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:my_workout_app/model/exercise.dart';
-import 'package:my_workout_app/pages/exercises_page.dart';
 import 'package:my_workout_app/pages/sign_in_screen.dart';
 import 'package:my_workout_app/pages/user_info_screen.dart';
 
@@ -14,22 +13,20 @@ import '../controllers/exercise_controller.dart';
 import '../utils/authentication.dart';
 import '../view_models/profile_picture_notifier.dart';
 import '../widgets/image_select_dialog.dart';
+import 'home_page.dart';
 import 'new_exercise_page.dart';
-import 'new_workout_page.dart';
 import 'opening_page.dart';
 
-// HW 4 expected 1 hour it took roughly 1 hour to a 1.5 hours
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required User user}): _user = user, super(key: key);
+class ExercisesPage extends StatefulWidget {
+  const ExercisesPage({Key? key, required User user}): _user = user, super(key: key);
 
   final User _user;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ExercisesPage> createState() => _ExercisesPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ExercisesPageState extends State<ExercisesPage> {
   final Future<List<Exercise>> _exercisesFuture = ExerciseController().getExercises();
   List<Exercise>? _exercises;
 
@@ -105,28 +102,28 @@ class _HomePageState extends State<HomePage> {
           }
           if (_exercises == null) {
             return Scaffold(
-              appBar: AppBar(title: const Text('My Workouts')),
+              appBar: AppBar(title: const Text('All Exercises')),
               body: const CircularProgressIndicator(),
             );
           }
 
           return Scaffold(
-            appBar: AppBar(title: const Text('My Workouts'),
-                // actions: [
-                //
-                //   // if (_exercises!.any((task) => task.isCompleted))
-                //   //   IconButton(
-                //   //     onPressed: () {
-                //   //       setState(() {
-                //   //         //_tasks!.removeWhere((task) => task.isCompleted == true);
-                //   //         _delete();
-                //   //       });
-                //   //     },
-                //   //     icon: const Icon(Icons.delete),
-                //   //
-                //   //   ),
-                //   // profilePic(),
-                // ]
+            appBar: AppBar(title: const Text('All Exercises'),
+              // actions: [
+              //
+              //   // if (_exercises!.any((task) => task.isCompleted))
+              //   //   IconButton(
+              //   //     onPressed: () {
+              //   //       setState(() {
+              //   //         //_tasks!.removeWhere((task) => task.isCompleted == true);
+              //   //         _delete();
+              //   //       });
+              //   //     },
+              //   //     icon: const Icon(Icons.delete),
+              //   //
+              //   //   ),
+              //   // profilePic(),
+              // ]
             ),
 
 
@@ -141,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                 FloatingActionButton(
                   onPressed: () async {
                     final result = await Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const NewWorkoutPage()));
+                        MaterialPageRoute(builder: (_) => const NewExercisePage()));
                     if (result is List &&
                         result[0] is String &&
                         (result[1] is DateTime || result[1] == null) &&
@@ -159,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                     }
                   },
                   heroTag: "plus",
-                  tooltip: 'New Task',
+                  tooltip: 'New Exercise',
                   child: const Icon(Icons.add),
                 ),
                 const SizedBox(height: 10),
@@ -200,25 +197,8 @@ class _HomePageState extends State<HomePage> {
                             .pushReplacement(_routeToSignInScreen());
                       },
                     ),
-                    // ListTile(
-                    //   title: const Text('Workouts'),
-                    //   onTap: () async {
-                    //
-                    //     User? user = _user;
-                    //
-                    //     if (user != null) {
-                    //       Navigator.of(context).pushReplacement(
-                    //         MaterialPageRoute(
-                    //           builder: (context) => HomePage(
-                    //             user: user,
-                    //           ),
-                    //         ),
-                    //       );
-                    //     }
-                    //   },
-                    // ),
                     ListTile(
-                      title: const Text('Exercises'),
+                      title: const Text('Workouts'),
                       onTap: () async {
 
                         User? user = _user;
@@ -226,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                         if (user != null) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => ExercisesPage(
+                              builder: (context) => HomePage(
                                 user: user,
                               ),
                             ),
@@ -234,6 +214,23 @@ class _HomePageState extends State<HomePage> {
                         }
                       },
                     ),
+                    // ListTile(
+                    //   title: const Text('Exercises'),
+                    //   onTap: () async {
+                    //
+                    //     User? user = _user;
+                    //
+                    //     if (user != null) {
+                    //       Navigator.of(context).pushReplacement(
+                    //         MaterialPageRoute(
+                    //           builder: (context) => ExercisesPage(
+                    //             user: user,
+                    //           ),
+                    //         ),
+                    //       );
+                    //     }
+                    //   },
+                    // ),
                   ],
                 ),
               ),
@@ -248,7 +245,7 @@ class _HomePageState extends State<HomePage> {
     return CheckboxListTile(
       title: Text(_exercises![index].title),
       subtitle: Text(
-        _exercises![index].description
+          _exercises![index].description
       ),
       onChanged: (bool? value) {  }, value: null,
       // value: _exercises![index].isCompleted,
